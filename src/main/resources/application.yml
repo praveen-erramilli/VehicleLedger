@@ -1,0 +1,7 @@
+server.port: 9090
+
+default.name: "appUser2"
+default.pem-path: "/Users/sabyasachi.bhattach/go/src/github.com/njoysubho/fabric-samples/test-network/organizations/peerOrganizations/org1.example.com/ca/ca.org1.example.com-cert.pem"
+default.network-config-path: "/Users/sabyasachi.bhattach/go/src/github.com/njoysubho/fabric-samples/test-network/organizations/peerOrganizations/org1.example.com/connection-org1.json"
+
+pem.path: "/Users/sabyasachi.bhattach/go/src/github.com/njoysubho/fabric-samples/test-network/organizations/peerOrganizations/org1.example.com/ca/ca.org1.example.com-cert.pem"

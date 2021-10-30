@@ -1,8 +1,11 @@
 package com.example.controller;
 
+import com.example.dto.OwnerDTO;
+import com.example.dto.TransferOwnerDTO;
 import com.example.model.Vehicle;
 import com.example.service.VehicleService;
 import lombok.AllArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -16,10 +19,11 @@ public class VehicleController {
         return vehicleService.initLedger();
     }
 
-    @PostMapping("/vehicle/{vehicleID}")
+    @PostMapping("/vehicle")
     @ResponseBody
-    public Vehicle createVehicle(@PathVariable String vehicleID) throws Exception {
-        return vehicleService.createVehicle(vehicleID);
+    public ResponseEntity<Void> createVehicle(@RequestBody Vehicle vehicle) throws Exception {
+         vehicleService.createVehicle(vehicle);
+         return ResponseEntity.accepted().build();
     }
 
     @GetMapping("/vehicle/{vehicleID}")
@@ -28,15 +32,15 @@ public class VehicleController {
         return vehicleService.getVehicle(vehicleID);
     }
 
-    @PostMapping("/vehicle/{vehicleID}/owner")
+    @PutMapping("/vehicle/{vehicleID}/owner")
     @ResponseBody
-    public Vehicle addOwner(@PathVariable String vehicleID, @RequestBody String owner) throws Exception {
-        return vehicleService.addOwner(vehicleID, owner);
+    public Vehicle addOwner(@PathVariable String vehicleID, @RequestBody OwnerDTO owner) throws Exception {
+        return vehicleService.addOwner(vehicleID, owner.getOwner());
     }
 
-    @PutMapping("/vehilce/{vehicleID}/currentOwner")
+    @PutMapping("/vehicle/{vehicleID}/transfer")
     @ResponseBody
-    public Vehicle transferOwner(@PathVariable String vehicleID, @RequestBody String owner) throws Exception {
-        return vehicleService.transferOwner(vehicleID, owner);
+    public Vehicle transferOwner(@PathVariable String vehicleID, @RequestBody TransferOwnerDTO owner) throws Exception {
+        return vehicleService.transferOwner(vehicleID, owner.getTo());
     }
 }
