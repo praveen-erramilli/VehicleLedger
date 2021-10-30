@@ -8,6 +8,8 @@ import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @AllArgsConstructor
 public class VehicleController {
@@ -42,5 +44,11 @@ public class VehicleController {
     @ResponseBody
     public Vehicle transferOwner(@PathVariable String vehicleID, @RequestBody TransferOwnerDTO owner) throws Exception {
         return vehicleService.transferOwner(vehicleID, owner.getTo());
+    }
+
+    @GetMapping("/vehicle")
+    public ResponseEntity<List<Vehicle>> getAllVehicles() throws Exception {
+      List<Vehicle> vehicles = vehicleService.getAll();
+      return ResponseEntity.ok(vehicles);
     }
 }
